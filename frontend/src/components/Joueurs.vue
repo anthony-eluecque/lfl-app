@@ -14,6 +14,9 @@
             <div class="col col-4">
                 Nationalité
             </div>
+            <div class="col col-1">
+
+            </div>
         </li>
         <li class="table-row" v-for="(player,index) in detail_joueurs" :key="index">
             <div class="col col-1" data-label="pseudo">
@@ -36,8 +39,7 @@
                     {{nationalites[(detail_joueurs[index].id_nationalite)-1].libelle_nationalite}}
                 </p>
             </div>
-            <button class="showPlayer" v-on:click="displayPlayer(detail_joueurs[index])">Afficher</button>
-            
+            <button class="col col-5 showPlayer" v-on:click="displayPlayer(detail_joueurs[index])">Afficher</button>
         </li>
     </ul>
 </template>
@@ -46,16 +48,9 @@
 export default {
     name:"Vue-joueurs",
     props:["detail_joueurs","nationalites"],
-    data:function(){
-        return{
-            data_joueur : null,
-            display_detail : false
-        }
-    },
     methods:{
         displayPlayer(joueur){
-            this.data_joueur = joueur;
-            this.display_detail = true;
+            this.$emit('displayPlayer',joueur)
         }
     }
 }
@@ -73,7 +68,7 @@ export default {
         }
         .table-row{
             background-color: #ffffff;
-            box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+            box-shadow: 0px 1px 11px 0px rgba(0,0,0,0.4);
         }
 
         #header-table{

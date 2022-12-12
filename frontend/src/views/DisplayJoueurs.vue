@@ -1,22 +1,27 @@
 <template>
     <div class="container-players">
-        <Joueurs :detail_joueurs="detail_joueurs" :nationalites="nationalites"  />
+        <Joueurs @displayPlayer="showPlayerEmit" :detail_joueurs="detail_joueurs" :nationalites="nationalites"  />
+        <Joueur @hidePlayer="hidePlayerEmit" v-if="display_detail_joueur" :data_joueur="data_detail_joueur"/>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import Joueurs from "@/components/Joueurs.vue"
+import Joueur from "@/modals/Joueur.vue"
 export default {
     name:"Vue-joueurs",
     data:function(){
         return{
             detail_joueurs : null,
-            nationalites : null
+            nationalites : null,
+            display_detail_joueur : false,
+            data_detail_joueur : null
         }
     },
     components:{
-      Joueurs 
+      Joueurs,
+      Joueur
     },
     mounted(){
         // const route = this.$route.params;
@@ -40,6 +45,16 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
+    },
+    methods:{
+        showPlayerEmit(joueur){
+            this.data_detail_joueur = joueur;
+            this.display_detail_joueur = true;
+        },
+        hidePlayerEmit(){
+            this.display_detail_joueur = false;
+            this.data_detail_joueur = null;
+        }
     }
 }
 
