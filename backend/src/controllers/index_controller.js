@@ -8,6 +8,11 @@ const pool = new Pool({
     port:'5433'
 })
 
+const getTeamOfAPlayer = async(req,res) => {
+    const response = await pool.query(`Select * from jouer_dans where id_equipe = (Select id_equipe from jouer_dans where id_joueur = ${req.params.id_joueur})`)
+    res.status(200).json(response.rows);
+}
+
 const getPlayers = async(req,res) => {
     const response = await pool.query(`Select * from Joueurs`);
     res.status(200).json(response.rows);
@@ -29,7 +34,7 @@ const getEquipes = async(req,res) => {
 }
 
 const getClassement = async(req,res) => {
-    const response = await pool.query(`Select * from classement_lfl`);
+    const response = await pool.query(`Select * from classement_lfl order by nb_win desc`);
     res.status(200).json(response.rows);
 }
 
@@ -47,5 +52,6 @@ module.exports = {
     getChampions,
     getEquipes,
     getClassement,
-    getNationnalites
+    getNationnalites,
+    getTeamOfAPlayer
 }
