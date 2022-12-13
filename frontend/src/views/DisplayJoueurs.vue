@@ -1,41 +1,34 @@
 <template>
     <div class="container-players">
-        <Joueurs @displayPlayer="showPlayerEmit" :detail_joueurs="detail_joueurs" :nationalites="nationalites"  />
+        <h1>Les Joueurs de la LFL</h1>
+        <searchBar :text="text" @searchPlayer="setSearch"/>
+        <Joueurs @displayPlayer="showPlayerEmit" :searchPlayer="searchPlayer" :nationalites="nationalites"  />
         <Joueur @hidePlayer="hidePlayerEmit" v-if="display_detail_joueur" :data_joueur="data_detail_joueur"/>
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import searchBar from "@/components/searchBar.vue"
 import Joueurs from "@/components/Joueurs.vue"
 import Joueur from "@/modals/Joueur.vue"
 export default {
     name:"Vue-joueurs",
     data:function(){
         return{
-            detail_joueurs : null,
+            text : "Taper le nom d'un joueur",
             nationalites : null,
             display_detail_joueur : false,
-            data_detail_joueur : null
+            data_detail_joueur : null,
+            searchPlayer:""
         }
     },
     components:{
       Joueurs,
-      Joueur
+      Joueur,
+      searchBar
     },
     mounted(){
-        // const route = this.$route.params;
-        // const id_joueur = route['id']
-        axios
-            // .get("http://localhost:3000/players/"+id_joueur)
-            .get("http://localhost:3000/players")
-            .then((res) => {
-                this.detail_joueurs = res.data;
-                console.log(this.detail_joueurs);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
         axios
             .get("http://localhost:3000/nationalites")
             .then((res) => {
@@ -54,6 +47,9 @@ export default {
         hidePlayerEmit(){
             this.display_detail_joueur = false;
             this.data_detail_joueur = null;
+        },
+        setSearch(content){
+            this.searchPlayer = content
         }
     }
 }

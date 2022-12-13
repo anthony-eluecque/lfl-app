@@ -1,6 +1,5 @@
 <template>
     <ul class="responsive-table">
-        <h1>Les Joueurs de la LFL</h1>
         <li id="header-table">
             <div class="col col-1">
                 Pseudo
@@ -18,36 +17,63 @@
 
             </div>
         </li>
-        <li class="table-row" v-for="(player,index) in detail_joueurs" :key="index">
+        <li class="table-row" v-for="player,index in playersFilter" :key="index">
             <div class="col col-1" data-label="pseudo">
                 <p>
-                    {{detail_joueurs[index].pseudo}}
+                    {{player.pseudo}}
                 </p>
             </div>
             <div class="col col-2" data-label="nom">
                 <p>
-                    {{detail_joueurs[index].nom}}
+                    {{player.nom}}
                 </p>
             </div>
             <div class="col col-3" data-label="prenom">
                 <p>
-                    {{detail_joueurs[index].prenom}}
+                    {{player.prenom}}
                 </p>
             </div>
             <div class="col col-4" data-label="age">
                 <p>
-                    {{nationalites[(detail_joueurs[index].id_nationalite)-1].libelle_nationalite}}
+                    {{nationalites[(data_joueurs[index].id_nationalite)-1].libelle_nationalite}}
                 </p>
             </div>
-            <button class="col col-5 showPlayer" v-on:click="displayPlayer(detail_joueurs[index])">Afficher</button>
+            <button class="col col-5 showPlayer" v-on:click="displayPlayer(player)">Afficher</button>
         </li>
     </ul>
 </template>
 
-<script>    
+<script>
+import _ from 'lodash';
+import axios from 'axios';
 export default {
     name:"Vue-joueurs",
-    props:["detail_joueurs","nationalites"],
+    props:[
+        "nationalites",
+        "searchPlayer"],
+    data:function(){
+        return {
+            data_joueurs : null,
+        }
+    },
+    computed:{
+        playersFilter(){
+            if (this.searchPlayer.length > 0)
+                return _.filter(this.data_joueurs,
+                    player => player.nom.includes(this.searchPlayer.toUpperCase()))
+            else return this.data_joueurs;
+        }
+    },
+    mounted(){
+        axios
+            .get("http://localhost:3000/players")
+            .then((res) => {
+                this.data_joueurs = res.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    },
     methods:{
         displayPlayer(joueur){
             this.$emit('displayPlayer',joueur)
@@ -58,6 +84,9 @@ export default {
 
 <style lang="scss" scoped>
 .responsive-table{
+
+        padding-inline-start: 0px;
+
         li{
 
             border-radius: 10px;
@@ -74,7 +103,7 @@ export default {
         #header-table{
             margin-top: 50px;
             font-weight: bold;
-            background-color: #000;
+            background-color: rgb(17, 17, 17);
             box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
             div{
                 color: white;
@@ -112,6 +141,6 @@ export default {
         .col-4 {
             flex-basis: 25%;
         }
-    }
 
+    }
 </style>
