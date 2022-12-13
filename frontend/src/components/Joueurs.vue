@@ -40,6 +40,7 @@
             </div>
             <button class="col col-5 showPlayer" v-on:click="displayPlayer(player)">Afficher</button>
         </li>
+
     </ul>
 </template>
 
@@ -86,9 +87,9 @@ export default {
 .responsive-table{
 
         padding-inline-start: 0px;
+        // margin: auto;
 
         li{
-
             border-radius: 10px;
             padding: 25px 30px;
             display: flex;

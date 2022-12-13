@@ -1,7 +1,8 @@
 <template>
     <div class="container-players">
-        <h1>Les Joueurs de la LFL</h1>
+        <h1>La liste des joueurs de la LFL</h1>
         <searchBar :text="text" @searchPlayer="setSearch"/>
+        <AddPlayer/>
         <Joueurs @displayPlayer="showPlayerEmit" :searchPlayer="searchPlayer" :nationalites="nationalites"  />
         <Joueur @hidePlayer="hidePlayerEmit" v-if="display_detail_joueur" :data_joueur="data_detail_joueur"/>
     </div>
@@ -9,9 +10,10 @@
 
 <script>
 import axios from "axios";
-import searchBar from "@/components/searchBar.vue"
-import Joueurs from "@/components/Joueurs.vue"
-import Joueur from "@/modals/Joueur.vue"
+import searchBar from "@/components/searchBar.vue";
+import Joueurs from "@/components/Joueurs.vue";
+import Joueur from "@/modals/Joueur.vue";
+import AddPlayer from "@/components/AjoutJoueur.vue";
 export default {
     name:"Vue-joueurs",
     data:function(){
@@ -26,7 +28,8 @@ export default {
     components:{
       Joueurs,
       Joueur,
-      searchBar
+      searchBar,
+      AddPlayer
     },
     mounted(){
         axios
@@ -58,7 +61,7 @@ export default {
 
 <style lang="scss" scoped>
 .container-players{
-    max-width: 900px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     padding : 0px 10px 0px 10px;
