@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
 import DisplayJoueurs from '../views/DisplayJoueurs.vue'
 import AccueilView from '../views/AccueilView.vue'
-import Equipes from '../views/Equipes.vue'
-import Classement from '../views/Classement.vue'
+import DisplayEquipes from '../views/DisplayEquipes.vue'
+import DisplayClassement from '../views/DisplayClassement.vue'
 
 Vue.use(VueRouter)
 
@@ -19,11 +19,16 @@ const routes = [
         },
         {
           path: '/equipes',
-          component: Equipes
+          component: DisplayEquipes
         },
         {
           path: '/classement',
-          component: Classement
+          component: DisplayClassement,
+          children:[
+            {
+              path:'/classement/:week'
+            }
+          ]
         }
       ],
     },

@@ -2,7 +2,7 @@
     <div class="container-players">
         <h1>La liste des joueurs de la LFL</h1>
         <searchBar :text="text" @searchPlayer="setSearch"/>
-        <AddPlayer/>
+        <AddPlayer :nationalites="nationalites"/>
         <Joueurs @displayPlayer="showPlayerEmit" :searchPlayer="searchPlayer" :nationalites="nationalites"  />
         <Joueur @hidePlayer="hidePlayerEmit" v-if="display_detail_joueur" :data_joueur="data_detail_joueur"/>
     </div>

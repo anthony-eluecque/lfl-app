@@ -99,6 +99,10 @@ export default {
         .table-row{
             background-color: #ffffff;
             box-shadow: 0px 1px 11px 0px rgba(0,0,0,0.4);
+            transition: transform .5s;
+        }
+        .table-row:hover{
+            transform: scale(1.1);
         }
 
         #header-table{

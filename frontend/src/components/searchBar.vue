@@ -30,6 +30,7 @@ export default {
     background-color: #0091ff;
     padding: 25px;
     border-radius: 8px;
+    box-shadow: 0px 5px 9px 0px rgba(0,0,0,0.5);
     h2{
         float: left;
         color: white;
