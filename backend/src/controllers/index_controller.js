@@ -8,6 +8,11 @@ const pool = new Pool({
     port:'5433'
 })
 
+const getRoles = async(req,res) => {
+    const response = await pool.query(`Select * from roles`);
+    res.status(200).json(response.rows);
+}
+
 const getTeamOfAPlayer = async(req,res) => {
     const response = await pool.query(`Select * from jouer_dans where id_equipe = (Select id_equipe from jouer_dans where id_joueur = ${req.params.id_joueur})`)
     res.status(200).json(response.rows);
@@ -44,6 +49,26 @@ const getNationnalites = async(req,res) => {
 }
 
 
+const getPlayer = async(req,res) => {
+    const response = await pool.query(`Select * from Joueurs where id_joueur = ${req.params.id_joueur}`)
+    res.status(200).json(response.rows);
+}
+
+const getMatchsPlayer = async(req,res) => {
+    const response = await pool.query(`Select * from  get_matchs_joueur(${req.params.id_joueur})`);
+    res.status(200).json(response.rows);
+}
+
+const getChampionsPlayer = async(req,res) => {
+    const response = await pool.query(`Select * from  get_champions_joueur(${req.params.id_joueur})`);
+    res.status(200).json(response.rows);
+}
+
+const getBestMatchsPlayer = async(req,res) => {
+    const response = await pool.query(`Select * from  meilleurs_matchs_joueur(${req.params.id_joueur})`);
+    res.status(200).json(response.rows);
+}
+
 
 
 module.exports = {
@@ -53,5 +78,10 @@ module.exports = {
     getEquipes,
     getClassement,
     getNationnalites,
-    getTeamOfAPlayer
+    getTeamOfAPlayer,
+    getRoles,
+    getPlayer,
+    getMatchsPlayer,
+    getBestMatchsPlayer,
+    getChampionsPlayer
 }
