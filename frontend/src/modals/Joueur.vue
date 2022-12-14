@@ -22,8 +22,9 @@
                     </thead>
                     <tbody>
                         <tr class="item-row" v-for="player,index in joueursEquipe" :key="index">
-                            <td>{{player.id_joueur}}</td>
-                            <td>{{player.id_role}}</td>
+                            <td>{{dataPlayers[player.id_joueur-1].pseudo}}</td>
+                            <!-- <td>{{dataPlayer[player.id_joueur-1].pseudo}}</td> -->
+                            <td>{{dataRoles[player.id_role-1].nom_role}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -65,6 +66,24 @@ export default {
                 console.log(this.nationalites);
             })
             .catch((error) => {
+                console.log(error);
+            })
+        axios
+            .get("http://localhost:3000/roles")
+            .then((res) => {
+                this.dataRoles = res.data;
+                console.log(this.dataRoles);
+            })
+            .catch((error) =>{
+                console.log(error);
+            })
+        axios
+            .get("http://localhost:3000/players")
+            .then((res) => {
+                this.dataPlayers = res.data;
+                console.log(this.dataPlayers);
+            })
+            .catch((error) =>{
                 console.log(error);
             })
     },
