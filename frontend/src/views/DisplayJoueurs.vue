@@ -49,7 +49,7 @@ export default {
         },
         hidePlayerEmit(){
             this.display_detail_joueur = false;
-            this.data_detail_joueur = null;
+            // this.data_detail_joueur = null;
         },
         setSearch(content){
             this.searchPlayer = content

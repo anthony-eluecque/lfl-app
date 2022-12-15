@@ -6,13 +6,19 @@
                 <p>Nom : {{data_joueur.nom}}</p>
                 <p>Prénom : {{data_joueur.prenom}}</p>
                 <p>Date de Naissance : {{data_joueur.date_naissance}}</p>
-                <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1].libelle_nationalite}} </p>
+                <!-- <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1].libelle_nationalite}}</p> -->
+                <!-- <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1].libelle_nationalite}} </p> -->
             </div>
             <div id="champions">
                 <h2>Ses champions les plus joués</h2>
+                <ul>
+                    <li v-for="champ,index in dataChamp" :key="index">
+                        {{champ.champ_nom}}
+                    </li>
+                </ul>
             </div>
             <div id="equipe">
-                <h2>Son équipe</h2>
+                <h2>Son équipe : {{"AFFICHER"}}</h2>
                 <table>
                     <thead>
                         <tr>
@@ -22,7 +28,8 @@
                     </thead>
                     <tbody>
                         <tr class="item-row" v-for="player,index in joueursEquipe" :key="index">
-                            <td>{{dataPlayers[player.id_joueur-1].pseudo}}</td>
+                            <td>{{player.id_joueur}}</td>
+                            <!-- <td >{{dataPlayers[player.id_joueur-1].pseudo}}</td> -->
                             <!-- <td>{{dataPlayer[player.id_joueur-1].pseudo}}</td> -->
                             <td>{{dataRoles[player.id_role-1].nom_role}}</td>
                         </tr>
@@ -31,6 +38,14 @@
             </div>
             <div id="matchs">
                 <h2>Ses meilleurs matchs</h2>
+                <div id="container-matchs">
+                    
+                    <ul v-for="match,index in dataBestMatchs" :key="index">
+                        <li>{{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_1-1].nom_equipe}} VS {{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_2-1].nom_equipe}}</li>
+                        <li>KDA : {{dataMatchsJoueur[2-index].kda}} </li>
+                    </ul>
+                    
+                </div>
             </div>
         </div>
         <button id="closeButton" v-on:click="closeDetail()">Fermer</button>
@@ -47,10 +62,15 @@ export default {
     ],
     data:function(){
         return {
-            nationalites : null,
+            nationalites : [],
             joueursEquipe : null,
             dataPlayers : null,
-            dataRoles : null
+            dataRoles : null,
+            dataMatchs : null,
+            dataEquipes : null,
+            dataBestMatchs : null,
+            dataMatchsJoueur : null,
+            dataChamp : null,
         }
     }, 
     methods:{
@@ -58,45 +78,44 @@ export default {
             this.$emit('hidePlayer',false);
         }
     },
-    mounted(){
-        axios
-            .get("http://localhost:3000/nationalites")
-            .then((res) => {
-                this.nationalites = res.data;
-                console.log(this.nationalites);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        axios
-            .get("http://localhost:3000/roles")
-            .then((res) => {
-                this.dataRoles = res.data;
-                console.log(this.dataRoles);
-            })
-            .catch((error) =>{
-                console.log(error);
-            })
-        axios
-            .get("http://localhost:3000/players")
-            .then((res) => {
-                this.dataPlayers = res.data;
-                console.log(this.dataPlayers);
-            })
-            .catch((error) =>{
-                console.log(error);
-            })
+    beforeCreate(){
+        const requestOne = axios.get("http://localhost:3000/nationalites");
+        const requestTwo = axios.get("http://localhost:3000/players");
+        const requestThree = axios.get("http://localhost:3000/roles");
+        const requestFour = axios.get("http://localhost:3000/matchs");
+        const requestFive = axios.get("http://localhost:3000/equipes");
+        axios.all([requestOne, requestTwo, requestThree,requestFour,requestFive]).then(axios.spread((...responses) => {
+            
+            this.nationalites = responses[0].data;
+            this.dataPlayers = responses[1].data;
+            this.dataRoles = responses[2].data;
+            this.dataMatchs = responses[3].data;
+            this.dataEquipes = responses[4].data;
+
+            console.log(this.nationalites[0])
+
+
+            })).catch(errors => {
+                console.log(errors)
+        })
     },
-    beforeUpdate(){
-        axios
-            .get("http://localhost:3000/equipes/"+this.data_joueur.id_joueur)
-            .then((res) => {
-                this.joueursEquipe = res.data
-                // console.log(this.joueursEquipe)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+    mounted(){
+        const requestOne = axios.get("http://localhost:3000/equipes/"+this.data_joueur.id_joueur)
+        const requestTwo = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/bmatchs")
+        const requestThree = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/matchs")
+        const requestFour = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/champions")
+        
+        axios.all([requestOne, requestTwo,requestThree,requestFour]).then(axios.spread((...responses) => {
+            
+            this.joueursEquipe = responses[0].data;
+            this.dataBestMatchs = responses[1].data;
+            this.dataMatchsJoueur = responses[2].data;
+            this.dataChamp = responses[3].data;
+
+            })).catch(errors => {
+                console.log(errors)
+        })
+
     }
     // voir avec axios et les routes pour récupérer les identifiants de chaque personne
 }

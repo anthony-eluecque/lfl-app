@@ -72,6 +72,7 @@ export default {
                 this.data_joueurs = res.data;
             })
             .catch((error) => {
+                console.log("vueJoueurErreurMounted")
                 console.log(error);
             })
     },
