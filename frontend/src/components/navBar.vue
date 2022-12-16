@@ -8,6 +8,9 @@
                 <a href="classement">Classement LFL</a>
             </li>
             <li>
+                <a href="matchs">Matchs</a>
+            </li>
+            <li>
                 <a href="equipes">Equipes</a>
             </li>
             <li>

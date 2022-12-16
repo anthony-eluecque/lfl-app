@@ -10,9 +10,6 @@
             <div class="col col-3">
                 Prénom
             </div>
-            <div class="col col-4">
-                Nationalité
-            </div>
             <div class="col col-1">
 
             </div>
@@ -31,11 +28,6 @@
             <div class="col col-3" data-label="prenom">
                 <p>
                     {{player.prenom}}
-                </p>
-            </div>
-            <div class="col col-4" data-label="age">
-                <p>
-                    {{nationalites[(data_joueurs[index].id_nationalite)-1].libelle_nationalite}}
                 </p>
             </div>
             <button class="col col-5 showPlayer" v-on:click="displayPlayer(player)">Afficher</button>
@@ -100,10 +92,10 @@ export default {
         .table-row{
             background-color: #ffffff;
             box-shadow: 0px 1px 11px 0px rgba(0,0,0,0.4);
-            transition: transform .5s;
+            transition: transform .4s;
         }
         .table-row:hover{
-            transform: scale(1.1);
+            transform: scale(1.03);
         }
 
         #header-table{

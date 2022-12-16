@@ -14,6 +14,11 @@ const getRoles = async(req,res) => {
 }
 
 const getTeamOfAPlayer = async(req,res) => {
+    const response = await pool.query(`Select * from jouer_dans where id_joueur = ${req.params.id_joueur}`)
+    res.status(200).json(response.rows);
+}
+
+const getMatesPlayer = async(req,res) => {
     const response = await pool.query(`Select * from jouer_dans where id_equipe = (Select id_equipe from jouer_dans where id_joueur = ${req.params.id_joueur})`)
     res.status(200).json(response.rows);
 }
@@ -38,6 +43,29 @@ const getEquipes = async(req,res) => {
     res.status(200).json(response.rows);
 }
 
+const getEquipe = async(req,res) => {
+    const response = await pool.query(`Select * from Equipes where id_equipe = ${req.params.id_equipe}`)
+    res.status(200).json(response.rows);
+}
+
+const getKdaEquipe = async(req,res) => {
+
+    const response = await pool.query(`Select * from calcul_kda_equipe(${req.params.id_equipe})`)
+    res.status(200).json(response.rows);
+}
+
+const getStatsEquipe = async(req,res) =>{
+    const response = await pool.query(`Select * from statistique_lfl where id_equipe = (${req.params.id_equipe})`);
+    res.status(200).json(response.rows);
+}
+
+const getCoach = async(req,res) => {
+
+    const response = await pool.query(`Select * from Coachs where id_coach = (Select id_coach from equipes where id_equipe = ${req.params.id_equipe}) `)
+    res.status(200).json(response.rows);
+
+}
+
 const getClassement = async(req,res) => {
     const response = await pool.query(`Select * from classement_lfl order by nb_win desc`);
     res.status(200).json(response.rows);
@@ -48,6 +76,11 @@ const getNationnalites = async(req,res) => {
     res.status(200).json(response.rows);
 }
 
+const getPlayersTeam = async(req,res) => {
+    const response = await pool.query(`Select * from jouer_dans where id_equipe = (${req.params.id_equipe})`)
+    res.status(200).json(response.rows);
+
+}
 
 const getPlayer = async(req,res) => {
     const response = await pool.query(`Select * from Joueurs where id_joueur = ${req.params.id_joueur}`)
@@ -67,7 +100,7 @@ const getChampionsPlayer = async(req,res) => {
 const getBestMatchsPlayer = async(req,res) => {
     const response = await pool.query(`Select * from  meilleurs_matchs_joueur(${req.params.id_joueur})`);
     res.status(200).json(response.rows);
-}
+}   
 
 
 
@@ -79,9 +112,15 @@ module.exports = {
     getClassement,
     getNationnalites,
     getTeamOfAPlayer,
-    getRoles,
+    getRoles,   
     getPlayer,
     getMatchsPlayer,
     getBestMatchsPlayer,
-    getChampionsPlayer
+    getChampionsPlayer,
+    getMatesPlayer,
+    getEquipe,
+    getKdaEquipe,
+    getCoach,
+    getStatsEquipe,
+    getPlayersTeam
 }

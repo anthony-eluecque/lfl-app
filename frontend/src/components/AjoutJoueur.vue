@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import moment from 'moment';
+// import axios from 'axios';
+// import moment from 'moment';
 export default {
     name:"Ajout-vue",
     props:[
@@ -44,29 +44,29 @@ export default {
     },  
     methods:{
         postNewPlayer(){
-            this.pseudoPlayer = document.getElementById("pseudo").value
-            this.dateNai = moment(document.getElementById("age").value).format("DD-MM-YYYY")
-            this.nomPlayer = document.getElementById("nom").value
-            this.prenomPlayer = document.getElementById("prenom").value
-            this.nationalites.forEach(element => {
-                if (element.libelle_nationalite==document.getElementById("natio").value)
-                    this.natioPlayer = element.id_nationalite
-            });
-            console.log(this.natioPlayer)
-            axios.post("http://localhost:3000/players",{
-                // id_joueur: 
-                pseudo: this.pseudo,
-                nom: this.nomPlayer,
-                prenom:this.prenomPlayer,
-                date_naissance: this.dateNai,
-                id_nationalite: this.natioPlayer,
-            })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            // this.pseudoPlayer = document.getElementById("pseudo").value
+            // this.dateNai = moment(document.getElementById("age").value).format("DD-MM-YYYY")
+            // this.nomPlayer = document.getElementById("nom").value
+            // this.prenomPlayer = document.getElementById("prenom").value
+            // this.nationalites.forEach(element => {
+            //     if (element.libelle_nationalite==document.getElementById("natio").value)
+            //         this.natioPlayer = element.id_nationalite
+            // });
+            // console.log(this.natioPlayer)
+            // axios.post("http://localhost:3000/players",{
+            //     // id_joueur: 
+            //     pseudo: this.pseudo,
+            //     nom: this.nomPlayer,
+            //     prenom:this.prenomPlayer,
+            //     date_naissance: this.dateNai,
+            //     id_nationalite: this.natioPlayer,
+            // })
+            // .then(function (response) {
+            //     console.log(response);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
 
         }
     }

@@ -21,7 +21,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  // background-image: url(https://upload.wikimedia.org/wikipedia/commons/4/43/1cun0172_Jpg_%28125315201%29.jpeg);
+  // opacity: 0.2;
 }
+
 *{
     margin: 0;
     padding: 0;

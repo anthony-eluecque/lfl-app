@@ -1,7 +1,7 @@
 <template>
     <div id="grid-team">
         <li class="grid-item" v-for="equipe,index in equipes" :key="index">
-            <a>{{equipe.nom_equipe}}</a>
+            <a v-on:click="displayModalEquipe(equipe.id_equipe)">{{equipe.nom_equipe}}</a>
         </li>
     </div>
 </template>
@@ -12,7 +12,7 @@ export default {
     name:"Vue-equipes",
     data:function(){
         return {
-            equipes:null   
+            equipes:null
         }
     },
     mounted(){
@@ -26,6 +26,11 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
+    },
+    methods:{
+        displayModalEquipe(id){
+            this.$emit("showEquipeEmit",id);
+        }
     }
 }
 </script>

@@ -6,8 +6,7 @@
                 <p>Nom : {{data_joueur.nom}}</p>
                 <p>Prénom : {{data_joueur.prenom}}</p>
                 <p>Date de Naissance : {{data_joueur.date_naissance}}</p>
-                <!-- <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1].libelle_nationalite}}</p> -->
-                <!-- <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1].libelle_nationalite}} </p> -->
+                <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1]}}</p>
             </div>
             <div id="champions">
                 <h2>Ses champions les plus joués</h2>
@@ -28,9 +27,7 @@
                     </thead>
                     <tbody>
                         <tr class="item-row" v-for="player,index in joueursEquipe" :key="index">
-                            <td>{{player.id_joueur}}</td>
-                            <!-- <td >{{dataPlayers[player.id_joueur-1].pseudo}}</td> -->
-                            <!-- <td>{{dataPlayer[player.id_joueur-1].pseudo}}</td> -->
+                            <td>{{dataPlayers[player.id_joueur-1].pseudo}}</td>
                             <td>{{dataRoles[player.id_role-1].nom_role}}</td>
                         </tr>
                     </tbody>
@@ -42,9 +39,9 @@
                     
                     <ul v-for="match,index in dataBestMatchs" :key="index">
                         <li>{{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_1-1].nom_equipe}} VS {{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_2-1].nom_equipe}}</li>
-                        <li>KDA : {{dataMatchsJoueur[2-index].kda}} </li>
+                        <!-- <li>KDA : {{dataMatchsJoueur[].kda}} </li> -->
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
@@ -78,7 +75,7 @@ export default {
             this.$emit('hidePlayer',false);
         }
     },
-    beforeCreate(){
+    created(){
         const requestOne = axios.get("http://localhost:3000/nationalites");
         const requestTwo = axios.get("http://localhost:3000/players");
         const requestThree = axios.get("http://localhost:3000/roles");
@@ -92,7 +89,6 @@ export default {
             this.dataMatchs = responses[3].data;
             this.dataEquipes = responses[4].data;
 
-            console.log(this.nationalites[0])
 
 
             })).catch(errors => {
@@ -100,7 +96,7 @@ export default {
         })
     },
     mounted(){
-        const requestOne = axios.get("http://localhost:3000/equipes/"+this.data_joueur.id_joueur)
+        const requestOne = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/mates")
         const requestTwo = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/bmatchs")
         const requestThree = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/matchs")
         const requestFour = axios.get("http://localhost:3000/players/"+this.data_joueur.id_joueur+"/champions")

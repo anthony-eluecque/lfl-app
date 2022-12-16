@@ -14,10 +14,11 @@
             <tbody>
                 <tr class="item-row" v-for="equipe,index in classement" :key="index">
                     <td>{{index+1}}</td>
-                    <td>{{equipes[index].nom_equipe}}</td>
+                    <td>{{equipes[equipe.id_equipe-1].nom_equipe}}</td>
                     <td>{{equipe.nb_win}}</td>
                     <td>{{equipe.nb_lose}}</td>
-                    <td><button>Statistiques</button></td>
+                    <!-- <td>{{equipe.nb_win/equipe.nb_lose}}</td> -->
+                    <!-- <td><button>Statistiques</button></td> -->
                 </tr>
             </tbody>
         </table>
@@ -31,8 +32,20 @@ export default {
     data:function(){
         return {
             classement:null,
-            equipes:null
+            equipes:null,
+            roles:null
         }
+    },
+    created(){
+        axios
+            .get("http://localhost:3000/equipes")
+            .then((res) => {
+                this.equipes = res.data;
+                console.log(this.equipes);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     },
     beforeMount(){
         console.log('Mounted');
@@ -41,16 +54,6 @@ export default {
             .then((res) => {
                 this.classement = res.data;
                 console.log(this.classement);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-
-        axios
-            .get("http://localhost:3000/equipes")
-            .then((res) => {
-                this.equipes = res.data;
-                console.log(this.equipes);
             })
             .catch((error) => {
                 console.log(error);
