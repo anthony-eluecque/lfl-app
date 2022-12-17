@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 
 
-const { getPlayers , getMatchs, getChampions , getEquipes , getClassement, getNationnalites, getTeamOfAPlayer , getRoles, getBestMatchsPlayer, getChampionsPlayer, getPlayer, getMatchsPlayer, getMatesPlayer, getEquipe, getKdaEquipe, getCoach, getStatsEquipe, getPlayersTeam } =  require('../controllers/index_controller');
+const { getPlayers , getMatchs, getChampions , getEquipes , getClassement, getNationnalites, getTeamOfAPlayer , getRoles, getBestMatchsPlayer, getChampionsPlayer, getPlayer, getMatchsPlayer, getMatesPlayer, getEquipe, getKdaEquipe, getCoach, getStatsEquipe, getPlayersTeam, getClassementWeek } =  require('../controllers/index_controller');
 
 
 router.get('/players/',getPlayers);
@@ -19,6 +19,8 @@ router.get('/equipes/:id_equipe/joueurs',getPlayersTeam)
 
 
 router.get('/classement',getClassement);
+router.get('/classement/:week',getClassementWeek)
+
 router.get('/nationalites',getNationnalites);
 router.get('/roles',getRoles);
 
