@@ -45,12 +45,12 @@
                 <tbody>
                     <tr v-for="player,i in dataTeamPlayers_2" :key="i">
                         <td>{{dataPlayers[player.id_joueur-1]?.pseudo}}</td>
-                        <td>{{dataMatch[i]?.kills_joueur}}</td>
-                        <td>{{dataMatch[i]?.mort_joueur}}</td>
-                        <td>{{dataMatch[i]?.assists_joueur}}</td>
-                        <td>{{dataMatch[i]?.total_creeps_tues}}</td>
-                        <td>{{dataMatch[i]?.id_champion_choisi}}</td>
-                        <td>{{dataMatch[i]?.id_champion_banni}}</td>
+                        <td>{{dataMatch[i+5]?.kills_joueur}}</td>
+                        <td>{{dataMatch[i+5]?.mort_joueur}}</td>
+                        <td>{{dataMatch[i+5]?.assists_joueur}}</td>
+                        <td>{{dataMatch[i+5]?.total_creeps_tues}}</td>
+                        <td>{{dataMatch[i+5]?.id_champion_choisi}}</td>
+                        <td>{{dataMatch[i+5]?.id_champion_banni}}</td>
                         <td>KDA</td>
                     </tr>
                 </tbody>

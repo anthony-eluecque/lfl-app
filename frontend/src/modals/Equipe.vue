@@ -1,12 +1,9 @@
 <template>
     <div id="container-equipe">
         <div id="equipe-content">
-            <button id="closeButton" v-on:click="hideEquipe()">X</button>
-
             <div id="property-team">
                 <div id="identity">
-                    <h2>Profile</h2>
-                    <p>Nom: {{dataEquipe[0]?.nom_equipe}}</p>
+                    <h2>Profile de l'équipe {{dataEquipe[0]?.nom_equipe}} </h2>
                     <p>Date de création : {{dataEquipe[0]?.date_creation}}</p>
                     <p>Coach : {{dataCoach[0]?.pseudo_coach}}</p>
                 </div>
@@ -20,8 +17,8 @@
                 </div>
             </div>
 
-            <div id="table-content">
-                <table>
+            <div id="content-table">
+                <table id="responsive-table">
                     <thead>
                         <tr>
                             <th>Pseudo</th>
@@ -41,6 +38,7 @@
                     </tbody>
                 </table>
             </div>
+            <button id="closeButton" v-on:click="hideEquipe()">Fermer</button>
         </div>
     </div>
 </template>
@@ -96,7 +94,7 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 #container-equipe{
     background-color:rgba(10, 7, 0, 0.562);
     position: fixed;
@@ -112,16 +110,14 @@ export default {
         margin: auto;
         max-width: 720px;
         margin-top: 50px;
-        background-color: #0091ff;
+        background-color: white;
         // background-color: #222831;
-        padding: 25px;
+        padding: 25px 25px 0px 25px;
         #property-team{
             max-width: 700px;
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
+            display: block;
             gap: 50px;
             grid-auto-rows: minmax(100px,auto);
-            margin: auto;
         
             #identity,#statistiques{
                 p,h2{
@@ -129,52 +125,59 @@ export default {
                 }
                 h2{
                     padding-bottom: 10px;
-                    border-bottom: 1px solid #f95959;
+                    border-bottom: 1px solid #0091ff;
                 }
-                padding: 10px;
                 background-color: white;
+                margin-bottom: 10px;
             }
         }
-
-
-        #table-content{
-            border-collapse: collapse;
-            font-size: 25px;
-            max-width: 700px;
-            margin: auto;
-            margin-top: 40px;
-
-            table{
-                width: 100%;
-                margin: auto;
-            }
-
-            thead{
-                tr{
-                    background-color: #f95959;
-                    color: white;
-                }
-            }
-            td{
-                gap: 40px;
-            }
-
-            th,td{  
-                padding-left: 8px;
-                padding-right: 8px;
-                padding-top: 8px;
-                padding-bottom: 8px;
-            }
-            tbody{
-                td{
-                    // border-radius: 0;
-                    background-color: #eeeeee;
-                    // border-bottom : 1px solid #ff5722;
-                }
-            }
-
-
+        p{
+            margin-top: 10px;
         }
     }
+    #responsive-table{
+
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: nowrap;
+            background-color: white;
+
+
+            td,th{
+                text-align: center;
+                padding: 12px;
+            }
+            tr{
+                transition: transform 0.4s;
+            }
+            tr:nth-child(even) {
+                background: #F8F8F8;
+            }
+            thead{
+                th{
+                    color: #ffffff;
+                    background: #0091ff ;
+                }
+                th:nth-child(odd) {
+                    color: #ffffff;
+                    background: #324960;
+                }
+            }
+        }
+        button{
+            border: none;
+            background-color: red;
+            padding: 10px 30px 10px 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
 }
 </style>
