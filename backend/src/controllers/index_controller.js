@@ -4,7 +4,7 @@ const pool = new Pool({
     host:'127.0.0.1',
     user:'antorak',
     password:'antorak123',
-    database:'lfl_sae',
+    database:'lfl',
     port:'5433'
 })
 
@@ -20,6 +20,11 @@ const getTeamOfAPlayer = async(req,res) => {
 
 const getMatesPlayer = async(req,res) => {
     const response = await pool.query(`Select * from jouer_dans where id_equipe = (Select id_equipe from jouer_dans where id_joueur = ${req.params.id_joueur})`)
+    res.status(200).json(response.rows);
+}
+
+const getClassementWeek = async(req,res) => {
+    const response = await pool.query(`Select * from classement_week_lfl where week = ${req.params.week} order by nb_win desc`)
     res.status(200).json(response.rows);
 }
 
@@ -103,10 +108,17 @@ const getBestMatchsPlayer = async(req,res) => {
 }   
 
 
+const getMatch = async(req,res) => {
+    const response = await pool.query(`Select * from Historique_matchs where id_match = ${req.params.id_match}`)
+    res.status(200).json(response.rows);
+
+}
+
 
 module.exports = {
     getPlayers,
     getMatchs,
+    getMatch,
     getChampions,
     getEquipes,
     getClassement,
@@ -122,5 +134,6 @@ module.exports = {
     getKdaEquipe,
     getCoach,
     getStatsEquipe,
-    getPlayersTeam
+    getPlayersTeam,
+    getClassementWeek
 }
