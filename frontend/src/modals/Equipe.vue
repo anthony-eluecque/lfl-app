@@ -6,17 +6,17 @@
             <div id="property-team">
                 <div id="identity">
                     <h2>Profile</h2>
-                    <p>Nom: {{dataEquipe[0].nom_equipe}}</p>
-                    <p>Date de création : {{dataEquipe[0].date_creation}}</p>
-                    <p>Coach : {{dataCoach[0].pseudo_coach}}</p>
+                    <p>Nom: {{dataEquipe[0]?.nom_equipe}}</p>
+                    <p>Date de création : {{dataEquipe[0]?.date_creation}}</p>
+                    <p>Coach : {{dataCoach[0]?.pseudo_coach}}</p>
                 </div>
                 <div id="statistiques">
                     <h2>Quelques Statistiques</h2>
                     <p>Nombre de victoire(s) : </p>
                     <p>Nombre de défaite(s)  :</p>
-                    <p>KDA de l'équipe : {{dataStatsEquipe[0].kda_equipe}}</p>
-                    <p>Winrate : {{dataStatsEquipe[0].winrate}} %</p>
-                    <p>Durée moyenne d'une partie : {{dataStatsEquipe[0].moyenne_duree_game}}</p>
+                    <p>KDA de l'équipe : {{dataStatsEquipe[0]?.kda_equipe}}</p>
+                    <p>Winrate : {{dataStatsEquipe[0]?.winrate}} %</p>
+                    <p>Durée moyenne d'une partie : {{dataStatsEquipe[0]?.moyenne_duree_game}}</p>
                 </div>
             </div>
 
