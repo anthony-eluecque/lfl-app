@@ -23,12 +23,13 @@ const routes = [
         },
         {
           path: '/classement',
-          component: DisplayClassement,
-          children:[
-            {
-              path:'/classement/:week'
-            }
-          ]
+          component: DisplayClassement,         
+        },
+        {
+          path:'/classement/:week',
+          name:'week',
+          component : DisplayClassement,
+          props:true
         },
         {
           path: '/matchs',

@@ -1,6 +1,6 @@
 <template>
-    <div id="container-classement">
-        <h1>Classement sur la totalité du split summer 2022</h1>
+    <div id="classement">
+        <h1>{{title}}</h1>
         <table id="responsive-table">
             <thead>
                 <tr>
@@ -14,9 +14,9 @@
             <tbody>
                 <tr class="item-row" v-for="equipe,index in classement" :key="index">
                     <td>{{index+1}}</td>
-                    <td>{{equipes[equipe.id_equipe-1].nom_equipe}}</td>
-                    <td>{{equipe.nb_win}}</td>
-                    <td>{{equipe.nb_lose}}</td>
+                    <td>{{equipes[equipe.id_equipe-1]?.nom_equipe}}</td>
+                    <td>{{equipe?.nb_win}}</td>
+                    <td>{{equipe?.nb_lose}}</td>
                     <!-- <td>{{equipe.nb_win/equipe.nb_lose}}</td> -->
                     <!-- <td><button>Statistiques</button></td> -->
                 </tr>
@@ -31,11 +31,15 @@ export default {
     name:"Classement-vue",
     data:function(){
         return {
+            title: null,
             classement:null,
             equipes:null,
             roles:null
         }
     },
+    props:[
+        'week'
+    ],
     created(){
         axios
             .get("http://localhost:3000/equipes")
@@ -47,9 +51,19 @@ export default {
                 console.log(error);
             })
     },
-    beforeMount(){
-        console.log('Mounted');
-        axios
+    mounted(){
+        if ((this.week) != null){
+            this.callApiWeek();
+            this.title = `Classement du Week ${this.week}`;
+        }
+        else{
+            this.callApiNoWeek();
+            this.title = "Classement sur la totalité du split summer 2022";
+        }
+    },
+    methods:{
+        callApiNoWeek(){
+            axios
             .get("http://localhost:3000/classement")
             .then((res) => {
                 this.classement = res.data;
@@ -58,15 +72,30 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
+        },
+        callApiWeek(){
+            axios
+            .get("http://localhost:3000/classement/"+this.week)
+            .then((res) => {
+                this.classement = res.data;
+                console.log(this.classement);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
     }
 }
 </script>
 
 <style lang="scss">
-#container-classement{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+#classement{
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 400px);
+    // width: 90%;
+    // margin-left: auto;
+    // margin-right: auto;
     h1{
         margin-top: 50px;
     }
