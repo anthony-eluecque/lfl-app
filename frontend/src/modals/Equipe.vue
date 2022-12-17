@@ -12,10 +12,10 @@
                 </div>
                 <div id="statistiques">
                     <h2>Quelques Statistiques</h2>
-                    <p>Nombre de victoire(s) : </p>
-                    <p>Nombre de défaite(s)  :</p>
-                    <p>KDA de l'équipe : {{dataStatsEquipe[0]?.kda_equipe}}</p>
+                    <p>Nombre de victoire(s) : {{dataClassement[dataEquipe[0]?.id_equipe-1]?.nb_win}}</p>
+                    <p>Nombre de défaite(s)  : {{dataClassement[dataEquipe[0]?.id_equipe-1]?.nb_lose}}</p>
                     <p>Winrate : {{dataStatsEquipe[0]?.winrate}} %</p>
+                    <p>KDA de l'équipe : {{dataStatsEquipe[0]?.kda_equipe}}</p>
                     <p>Durée moyenne d'une partie : {{dataStatsEquipe[0]?.moyenne_duree_game}}</p>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                         <tr class="item-row" v-for="player,index in dataJoueurs " :key="index">
-                            <td>{{player.id_joueur}}</td>
+                            <td>{{dataPseudoPlayer[player.id_joueur-1]?.pseudo}}</td>
                             <td>{{player.debut_contrat}}</td>
                             <td v-if="player.fin_contrat">{{player.fin_contrat}}</td>
                             <td v-else></td>
@@ -56,7 +56,9 @@ export default {
             dataCoach : [],
             dataStatsEquipe : [],
             dataEquipe : [],
-            dataJoueurs : []
+            dataJoueurs : [],
+            dataPseudoPlayer : [],
+            dataClassement : []
         }
     },  
     props:[
@@ -68,14 +70,18 @@ export default {
         const requestThree = axios.get("http://localhost:3000/equipes/" + this.id_equipe + "/coach")
         const requestFour = axios.get("http://localhost:3000/equipes/" + this.id_equipe + "/stats")
         const requestFive = axios.get("http://localhost:3000/equipes/"+ this.id_equipe + "/joueurs")
+        const requestSix = axios.get("http://localhost:3000/players");
+        const requestSeven = axios.get("http://localhost:3000/classement");
 
-        axios.all([requestOne, requestTwo,requestThree,requestFour,requestFive]).then(axios.spread((...responses) => {
+        axios.all([requestOne, requestTwo,requestThree,requestFour,requestFive,requestSix,requestSeven]).then(axios.spread((...responses) => {
             
             this.dataEquipe = responses[0].data;
             this.kdaEquipe = responses[1].data;
             this.dataCoach = responses[2].data;
             this.dataStatsEquipe = responses[3].data;
             this.dataJoueurs = responses[4].data;
+            this.dataPseudoPlayer = responses[5].data;
+            this.dataClassement = responses[6].data;
 
             })).catch(errors => {
                 console.log(errors)
@@ -105,10 +111,10 @@ export default {
         border-radius: 12px;
         margin: auto;
         max-width: 720px;
-        margin-top: 5   0px;
-        background-color: #222831;
+        margin-top: 50px;
+        background-color: #0091ff;
+        // background-color: #222831;
         padding: 25px;
-
         #property-team{
             max-width: 700px;
             display: grid;
