@@ -5,16 +5,16 @@
                 <a href="/">Accueil</a>
             </li>
             <li>
-                <a href="classement">Classement LFL</a>
+                <a href="/classement">Classement LFL</a>
             </li>
             <li>
-                <a href="matchs">Matchs</a>
+                <a href="/matchs">Matchs</a>
             </li>
             <li>
-                <a href="equipes">Equipes</a>
+                <a href="/equipes">Equipes</a>
             </li>
             <li>
-                <a href="joueurs">Joueurs</a>
+                <a href="/joueurs">Joueurs</a>
             </li>
         </ul>
     </nav>
@@ -45,7 +45,7 @@ nav{
 
         li{
             width: 100%;
-            border-bottom: 1px dotted white;
+            border-bottom: 1px solid white;
             a{
                 font-size: large;
                 display: block;
