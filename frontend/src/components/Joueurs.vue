@@ -109,20 +109,6 @@ export default {
                 font-size: 20px;
             }
         }
-        .showPlayer{
-            border: none;
-            background: #42b883;
-            color: white;
-            padding: 15px;
-            font-weight: bold;
-            font-size: 15px;
-            border-radius: 8px;
-
-        }
-        .showPlayer:hover{
-            cursor: pointer;
-        }
-
         h1{
             color: black;
             margin-top: 75px;
