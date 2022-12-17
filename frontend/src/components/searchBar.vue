@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 #searchBar{
+    width: 90%;
     margin-top: 50px;
     background-color: #0091ff;
     padding: 25px;

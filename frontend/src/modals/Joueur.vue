@@ -38,8 +38,12 @@
                 <div id="container-matchs">
                     
                     <ul v-for="match,index in dataBestMatchs" :key="index">
-                        <li>{{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_1-1].nom_equipe}} VS {{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_2-1].nom_equipe}}</li>
-                        <!-- <li>KDA : {{dataMatchsJoueur[].kda}} </li> -->
+                        <li>{{
+                            dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_1-1].nom_equipe}} 
+                            VS 
+                            {{dataEquipes[dataMatchs[match.v_id_match-1].id_equipe_2-1].nom_equipe}}</li>
+                        <!-- <p>{{dataMatchs[match.v_id_match-1]}}</p> -->
+                        <!-- <p>KDA : {{dataMatchsJoueur[dataMatchs[match.v_id_match-1].id_match]?.kda}}</p> -->
                     </ul>
 
                 </div>
@@ -118,7 +122,7 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 #container{
     background-color:rgba(10, 7, 0, 0.562);
     position: fixed;
@@ -129,23 +133,16 @@ export default {
     z-index: 9999;
 
     #player-content{
-        max-width: 800px;
-        // min-width: 700px;
+        max-width: 600px;
         background-color: #0091ff;
-        border-radius: 24px;
-        margin: auto;
-        margin-top: 200px;
+        margin: auto;   
+        margin-top: 25px;
         padding: 25px;
         padding-top: 10px;
-        display: grid;
-        grid-template-columns:  repeat(2,1fr);
-        gap:50px;
-        grid-auto-rows: minmax(100px,auto);
 
         #identity{
             background-color: white;
             padding: 20px;
-            border-radius: 24px;
             padding-top: 15px;
             p,h2{
                 text-align: left;
@@ -158,13 +155,12 @@ export default {
                 border-bottom: 3px solid #0091ff;
             }
             p{
+                margin-top:25px;
                 font-weight: bold;
             }
         }
         #champions{
             background-color: white;
-            // height: fit-content;
-            border-radius: 24px; 
             padding: 18px;
             padding-bottom: 12px;
             h2{
@@ -174,22 +170,33 @@ export default {
                 border-bottom: 3px solid #0091ff;
                 font-size: 23px;
             }
+            ul{
+                li{
+                    text-align: left;
+                    margin-top: 20px;
+                }
+            }
         }
 
         #matchs{
             background-color: white;
-            border-radius: 24px;
+
+            ul{
+                li{
+                    margin-top: 25px;
+                    text-align: left;
+                }
+            }
         }
 
         #equipe{
             background-color: white;
-            border-radius: 24px;
 
             padding: 18px;
             padding-bottom: 12px;
             padding-top: 12px;
             table{
-                margin:auto;
+                margin:0;
             }
             h2{
                 text-align: left;
@@ -221,5 +228,9 @@ export default {
             border-bottom-right-radius: 15px;
             
         }
+}
+
+li{
+    list-style-type: none;
 }
 </style>

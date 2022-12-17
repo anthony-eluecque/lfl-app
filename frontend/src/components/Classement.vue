@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #container-classement{
     width: 90%;
     margin-left: auto;

@@ -10,11 +10,11 @@
             <div class="col col-3">
                 Prénom
             </div>
-            <div class="col col-1">
+            <div class="col col-4">
 
             </div>
         </li>
-        <li class="table-row" v-for="player,index in playersFilter" :key="index">
+        <li v-on:click="displayPlayer(player)" class="table-row" v-for="player,index in playersFilter" :key="index">
             <div class="col col-1" data-label="pseudo">
                 <p>
                     {{player.pseudo}}
@@ -30,7 +30,7 @@
                     {{player.prenom}}
                 </p>
             </div>
-            <button class="col col-5 showPlayer" v-on:click="displayPlayer(player)">Afficher</button>
+            <!-- <button class="col col-5 showPlayer" v-on:click="displayPlayer(player)">Afficher</button> -->
         </li>
 
     </ul>
@@ -76,12 +76,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .responsive-table{
 
         padding-inline-start: 0px;
         // margin: auto;
-
+        width: calc(90% + 50px);
         li{
             border-radius: 10px;
             padding: 25px 30px;
@@ -90,12 +90,12 @@ export default {
             margin-bottom: 25px;
         }
         .table-row{
-            background-color: #ffffff;
+            background-color: #F8F8F8;
             box-shadow: 0px 1px 11px 0px rgba(0,0,0,0.4);
             transition: transform .4s;
         }
         .table-row:hover{
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         #header-table{
@@ -103,6 +103,7 @@ export default {
             font-weight: bold;
             background-color: rgb(17, 17, 17);
             box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+
             div{
                 color: white;
                 font-size: 20px;
@@ -128,17 +129,18 @@ export default {
             font-size: 25px;
         }
         .col-1{
-            flex-basis:10%;
+            flex-basis:33%;
         }
         .col-2 {
-            flex-basis: 20%;
+            flex-basis: 33%;
         }
         .col-3 {
-            flex-basis: 25%;
+            flex-basis: 33%;
         }
-        .col-4 {
-            flex-basis: 25%;
-        }
+
+        // .col-4{
+        //     flex-basis: 8%;
+        // }
 
     }
 </style>

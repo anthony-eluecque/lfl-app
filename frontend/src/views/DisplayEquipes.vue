@@ -37,8 +37,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 #container-display{
-    margin-top: 50px;
-
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 200px);
     h2{
         color: black;
         font-size: 25px

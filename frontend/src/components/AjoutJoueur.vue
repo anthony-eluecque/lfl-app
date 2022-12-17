@@ -18,8 +18,8 @@
         <label for="Natio">
             <input type="text" id="natio" placeholder="Nationalité">
         </label>
+        <button v-on:click="postNewPlayer()">Ajouter</button>
     </form>
-    <button v-on:click="postNewPlayer()">Ajouter</button>
 
 </div>
 </template>
@@ -77,24 +77,26 @@ export default {
 #Add-container{
     margin-top: 50px;
     display: flex;
+    width: 90%;
     background-color: #4453a1;
-    vertical-align: middle;
+    align-items: center;
     color: white;
+    padding: 25px;
 
     border-radius: 8px;
 
-    h2{
-        margin-left: 25px;
-    }
     form{
-        margin-top: 15px ;
+        display: grid;
+        grid-template-columns:  repeat(6,1fr);
+        gap: 10px;
+        grid-auto-rows: minmax(5px,auto);   
     }
 
     input{
         border-radius: 8px;
         border: none;
-        margin-left: 25px;
         padding: 10px;
+        width: 70%;
     }
 
     button{
@@ -103,9 +105,7 @@ export default {
         font-weight: bold;
         font-size: 15px;
         border: none;
-        height: 40px;
-        margin-top: 15px;
-        margin-left: 50px;
+        // height: 50%;
         border-radius: 8px;
     }
 

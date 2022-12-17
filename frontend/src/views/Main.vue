@@ -18,3 +18,10 @@ export default {
     },
   }
 </script>
+
+<style>
+.main{
+  display: inherit;
+  width: 100%;
+}
+</style>

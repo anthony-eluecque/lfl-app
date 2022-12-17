@@ -1,5 +1,6 @@
 <template>
     <div id="container-matchs">
+        <h1>La liste de tous les matchs de la BDD</h1>
         <Matchs @emitMatch="displayModalMatch"/>
         <Match @emitMatch="hideModalMatch" v-if="display_match" :id_match="id_match"/>
     </div>
@@ -33,5 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#container-matchs{
+    width: calc(100vw - 200px);
+}
 </style>

@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #grid-team{
     width: 80%;
     margin: auto;
@@ -47,6 +47,7 @@ export default {
     padding: 50px;
     border-radius: 12px;
     box-shadow: 0px 5px 9px 0px rgba(0,0,0,0.5);
+    margin-top: 50px;
 
     .grid-item{
         display: flex;
@@ -67,6 +68,7 @@ export default {
             line-height:  100px;
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
 
         a:hover{

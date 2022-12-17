@@ -29,36 +29,38 @@ export default {
 
 <style lang="scss" scoped>
 nav{
-    padding-bottom: 15px;
-    border-bottom: 1px solid black;
-}
-ul{
-    list-style-type: none;
+    min-height: 100vh;
+    min-width: 200px;
+    max-width: 200px;
+    // padding-bottom: 15px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    li{ 
-        border-radius: 10px;
-        a{
-            font-size: large;
-            display: block;
-            padding: 15px;
-            text-decoration: none;
-            color: black;
+    background-color: #0091ff;
+    ul{
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 0;
+        height: 60px;
+
+        li{
+            width: 100%;
+            border-bottom: 1px dotted white;
+            a{
+                font-size: large;
+                display: block;
+                padding: 20px;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
         }
-    }
-    li:hover{
-        
-        background-color: #0091ff;
-        a{
-            color: white;
-        }
-    }
-    #li-accueil{
-        background-color: #0091ff;
-        a{
-            font-weight: bold;
-            color: white;
+        li:hover{
+            
+            background-color: white;
+            a{
+                color: #0091ff;
+            }
         }
     }
 }

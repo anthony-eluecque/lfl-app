@@ -61,7 +61,12 @@ export default {
 
 <style lang="scss" scoped>
 .container-players{
-    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    // width: calc(100vw - 200px);
+    // max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     padding : 0px 10px 0px 10px;
