@@ -6,7 +6,7 @@
                 <p>Nom : {{data_joueur.nom}}</p>
                 <p>Prénom : {{data_joueur.prenom}}</p>
                 <p>Date de Naissance : {{data_joueur.date_naissance}}</p>
-                <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1]?.libelle_nationalite}}</p>
+                <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1]}}</p>
             </div>
             <div id="champions">
                 <h2>Ses champions les plus joués</h2>
@@ -53,7 +53,7 @@
 <script>
 import axios from 'axios';
 export default {
-    name:"Vue-joueur",
+    name:"Vue-modal-joueur",
     props:[
         "data_joueur",
     ],
