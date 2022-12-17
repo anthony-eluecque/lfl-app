@@ -18,7 +18,7 @@
             </div>
             <div id="equipe">
                 <h2>Son équipe : {{"AFFICHER"}}</h2>
-                <table>
+                <table id="responsive-table">
                     <thead>
                         <tr>
                             <th>Joueurs</th>
@@ -47,9 +47,9 @@
                     </ul>
 
                 </div>
+                <button id="closeButton" v-on:click="closeDetail()">Fermer</button>
             </div>
         </div>
-        <button id="closeButton" v-on:click="closeDetail()">Fermer</button>
     </div>
 </template>
 
@@ -134,15 +134,12 @@ export default {
 
     #player-content{
         max-width: 600px;
-        background-color: #0091ff;
         margin: auto;   
         margin-top: 25px;
-        padding: 25px;
-        padding-top: 10px;
 
         #identity{
             background-color: white;
-            padding: 20px;
+            padding: 20px 20px 0px 20px;
             padding-top: 15px;
             p,h2{
                 text-align: left;
@@ -180,7 +177,6 @@ export default {
 
         #matchs{
             background-color: white;
-
             ul{
                 li{
                     margin-top: 25px;
@@ -195,9 +191,6 @@ export default {
             padding: 18px;
             padding-bottom: 12px;
             padding-top: 12px;
-            table{
-                margin:0;
-            }
             h2{
                 text-align: left;
                 border-bottom: 3px solid #0091ff;
@@ -205,10 +198,45 @@ export default {
                 color: #0091ff;
             }   
 
+            #responsive-table{
+                margin-top: 15px;
+                border-radius: 6px;
+                font-size: 12px;
+                font-weight: normal;
+                border: none;
+                border-collapse: collapse;
+                width: 100%;
+                max-width: 100%;
+                white-space: nowrap;
+                background-color: white;
+
+
+                td,th{
+                    text-align: center;
+                    padding: 8px;
+                }
+                tr{
+                    transition: transform 0.4s;
+                }
+                tr:nth-child(even) {
+                    background: #F8F8F8;
+                }
+                thead{
+                    th{
+                        color: #ffffff;
+                        background: #0091ff ;
+                    }
+                    th:nth-child(odd) {
+                        color: #ffffff;
+                        background: #324960;
+                    }
+                }
+            }
+
         }
 
         #matchs{
-            padding: 18px;
+            padding: 18px 18px 0px 18px;
             padding-top: 12px;
             h2{
                 text-align: left;
@@ -218,15 +246,16 @@ export default {
             }
         }
     }
-    #closeButton{
-            background-color: #f95959;
+    button{
             border: none;
-            padding: 6px 24px 12px 24px;
+            background-color: red;
+            padding: 10px 30px 10px 30px;
             color: white;
-            font-size: 20px;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
 }
 
