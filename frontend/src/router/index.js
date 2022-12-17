@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Main from '../views/Main.vue'
-import DisplayJoueurs from '../views/DisplayJoueurs.vue'
-import AccueilView from '../views/AccueilView.vue'
-import DisplayEquipes from '../views/DisplayEquipes.vue'
-import DisplayClassement from '../views/DisplayClassement.vue'
-
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Main from '../views/Main.vue';
+import DisplayJoueurs from '../views/DisplayJoueurs.vue';
+import AccueilView from '../views/AccueilView.vue';
+import DisplayEquipes from '../views/DisplayEquipes.vue';
+import DisplayClassement from '../views/DisplayClassement.vue';
+import DisplayMatchs from '../views/DisplayMatchs.vue';
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,6 +29,10 @@ const routes = [
               path:'/classement/:week'
             }
           ]
+        },
+        {
+          path: '/matchs',
+          component : DisplayMatchs
         }
       ],
     },
