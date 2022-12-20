@@ -1,12 +1,12 @@
 <template>
     <div class="main">
-      <AccueilView></AccueilView>
+      <navBarVue/>
       <router-view></router-view>
     </div>
 </template>
   
 <script>
-import AccueilView from './AccueilView.vue';
+import navBarVue from '@/components/navBar.vue';
 export default {
     name: 'Main-vue',
     data() { return {
@@ -14,7 +14,7 @@ export default {
       }
     },
     components: {
-        AccueilView
+        navBarVue
     },
   }
 </script>
