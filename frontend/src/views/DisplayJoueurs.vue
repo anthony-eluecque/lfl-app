@@ -2,7 +2,7 @@
     <div class="container-players">
         <h1>La liste des joueurs de la LFL</h1>
         <searchBar :text="text" @searchPlayer="setSearch"/>
-        <AddPlayer :nationalites="nationalites"/>
+        <!-- <AddPlayer :nationalites="nationalites"/> -->
         <Joueurs @displayPlayer="showPlayerEmit" :searchPlayer="searchPlayer" :nationalites="nationalites"  />
         <Joueur @hidePlayer="hidePlayerEmit" v-if="display_detail_joueur" :data_joueur="data_detail_joueur"/>
     </div>
@@ -13,7 +13,7 @@ import axios from "axios";
 import searchBar from "@/components/searchBar.vue";
 import Joueurs from "@/components/Joueurs.vue";
 import Joueur from "@/modals/Joueur.vue";
-import AddPlayer from "@/components/AjoutJoueur.vue";
+// import AddPlayer from "@/components/AjoutJoueur.vue";
 export default {
     name:"Vue-joueurs",
     data:function(){
@@ -29,7 +29,7 @@ export default {
       Joueurs,
       Joueur,
       searchBar,
-      AddPlayer
+    //   AddPlayer
     },
     mounted(){
         axios
