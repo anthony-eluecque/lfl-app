@@ -1,6 +1,9 @@
 <template>
     <nav id="nav-bar">
         <ul>
+            <div id="logo-navbar">
+                <img src="@/assets/logolfl.png" alt="">
+            </div>
             <li id="li-accueil">
                 <a href="/">Accueil</a>
             </li>
@@ -61,6 +64,15 @@ nav{
             a{
                 color: #0091ff;
             }
+        }
+    }
+    #logo-navbar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            height: 90%;
+            width: 90%;
         }
     }
 }
