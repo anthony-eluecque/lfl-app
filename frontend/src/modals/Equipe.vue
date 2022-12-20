@@ -4,7 +4,7 @@
             <div id="property-team">
                 <div id="identity">
                     <h2>Profile de l'équipe {{dataEquipe[0]?.nom_equipe}} </h2>
-                    <p>Date de création : {{dataEquipe[0]?.date_creation}}</p>
+                    <p>Date de création : {{changeFormatDate(dataEquipe[0]?.date_creation)}}</p>
                     <p>Coach : {{dataCoach[0]?.pseudo_coach}}</p>
                 </div>
                 <div id="statistiques">
@@ -30,8 +30,8 @@
                     <tbody>
                         <tr class="item-row" v-for="player,index in dataJoueurs " :key="index">
                             <td>{{dataPseudoPlayer[player.id_joueur-1]?.pseudo}}</td>
-                            <td>{{player.debut_contrat}}</td>
-                            <td v-if="player.fin_contrat">{{player.fin_contrat}}</td>
+                            <td>{{changeFormatDate(player.debut_contrat)}}</td>
+                            <td v-if="player.fin_contrat">{{changeFormatDate(player.fin_contrat)}}</td>
                             <td v-else></td>
                             <td>{{player.id_role}}</td>
                         </tr>
@@ -88,6 +88,10 @@ export default {
     methods:{
         hideEquipe(){
             this.$emit("hideEquipeEmit",false);
+        },
+        changeFormatDate(date){
+            let d = new Date(date)
+            return d.getDay() + "/" +  d.getMonth() + "/" +  d.getFullYear()
         }
     }
 }

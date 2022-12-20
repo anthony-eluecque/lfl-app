@@ -5,7 +5,7 @@
                 <h2>Profile </h2>
                 <p>Nom : {{data_joueur.nom}}</p>
                 <p>Prénom : {{data_joueur.prenom}}</p>
-                <p>Date de Naissance : {{data_joueur.date_naissance}}</p>
+                <p>Date de Naissance : {{changeFormatDate(data_joueur.date_naissance)}}</p>
                 <p>Nationalité : {{nationalites[data_joueur.id_nationalite-1]?.libelle_nationalite}}</p>
             </div>
             <div id="champions">
@@ -17,7 +17,7 @@
                 </ul>
             </div>
             <div id="equipe">
-                <h2>Son équipe : {{"AFFICHER"}}</h2>
+                <h2>Son équipe : {{dataEquipes[dTemp[0]?.id_equipe-1]?.nom_equipe}}</h2>
                 <table id="responsive-table">
                     <thead>
                         <tr>
@@ -64,19 +64,24 @@ export default {
     data:function(){
         return {
             nationalites : [],
-            joueursEquipe : null,
-            dataPlayers : null,
-            dataRoles : null,
-            dataMatchs : null,
-            dataEquipes : null,
-            dataBestMatchs : null,
-            dataMatchsJoueur : null,
-            dataChamp : null,
+            joueursEquipe : [],
+            dataPlayers : [],
+            dataRoles : [],
+            dataMatchs : [],
+            dataEquipes : [],
+            dataBestMatchs : [],
+            dataMatchsJoueur : [],
+            dataChamp : [],
+            dTemp : []
         }
     }, 
     methods:{
         closeDetail(){
             this.$emit('hidePlayer',false);
+        },
+        changeFormatDate(date){
+            let d = new Date(date)
+            return d.getDay() + "/" +  d.getMonth() + "/" +  d.getFullYear()
         }
     },
     created(){
@@ -85,14 +90,17 @@ export default {
         const requestThree = axios.get("http://localhost:3000/roles");
         const requestFour = axios.get("http://localhost:3000/matchs");
         const requestFive = axios.get("http://localhost:3000/equipes");
-        axios.all([requestOne, requestTwo, requestThree,requestFour,requestFive]).then(axios.spread((...responses) => {
+        const requestSix = axios.get("http://localhost:3000/players/" + this.data_joueur.id_joueur + "/equipe")
+        axios.all([requestOne, requestTwo, requestThree,requestFour,requestFive,requestSix]).then(axios.spread((...responses) => {
             
             this.nationalites = responses[0].data;
             this.dataPlayers = responses[1].data;
             this.dataRoles = responses[2].data;
             this.dataMatchs = responses[3].data;
             this.dataEquipes = responses[4].data;
+            this.dTemp = responses[5].data;
 
+            console.log(this.dTemp)
 
 
             })).catch(errors => {
@@ -111,6 +119,8 @@ export default {
             this.dataBestMatchs = responses[1].data;
             this.dataMatchsJoueur = responses[2].data;
             this.dataChamp = responses[3].data;
+
+
 
             })).catch(errors => {
                 console.log(errors)

@@ -13,7 +13,7 @@
                 </thead>
                 <tbody>
                     <tr v-on:click="showLogMatch(match.id_match)" v-for="match,index in dataMatchs" :key="index">
-                        <td>{{match?.date_match}}</td>
+                        <td>{{changeFormatDate(match?.date_match)}}</td>
                         
                         <td v-if="match?.vainqueur==match?.id_equipe_1" class="winner">
                             {{dataEquipes[match?.id_equipe_1-1]?.nom_equipe}}
@@ -62,6 +62,10 @@ export default {
     methods:{
         showLogMatch(id_match){
             this.$emit("emitMatch",id_match);
+        },
+        changeFormatDate(date){
+            let d = new Date(date)
+            return d.getDay() + "/" +  d.getMonth() + "/" +  d.getFullYear()
         }
     }
 }
